@@ -41,49 +41,49 @@ file (described under Usage).
 
 # Usage
 
-	``` bash
-	$ ./backup.py --help
-	usage: backup.py [-h] [--loglevel LOGLEVEL] [--logfile LOGFILE]
-					 [--config CONFIG]
+``` bash
+$ ./backup.py --help
+usage: backup.py [-h] [--loglevel LOGLEVEL] [--logfile LOGFILE]
+				 [--config CONFIG]
 
-	backup script
+backup script
 
-	optional arguments:
-	  -h, --help           show this help message and exit
-	  --loglevel LOGLEVEL  set the log level (NONE, DEBUG, INFO, WARNING or ERROR)
-						   (default: ERROR)
-	  --logfile LOGFILE    set the log file (absolute path) (default:
-						   ~/.meldanya_backup.log)
-	  --config CONFIG      set the config file (absolute path) (default:
-						   ~/.meldanya_backup.conf)
-	```
+optional arguments:
+  -h, --help           show this help message and exit
+  --loglevel LOGLEVEL  set the log level (NONE, DEBUG, INFO, WARNING or ERROR)
+					   (default: ERROR)
+  --logfile LOGFILE    set the log file (absolute path) (default:
+					   ~/.meldanya_backup.log)
+  --config CONFIG      set the config file (absolute path) (default:
+					   ~/.meldanya_backup.conf)
+```
 
 The script is configured through a config file written in JSON. There's
 a sample config file in the project which you can use as a base. The
 sample looks something like:
 
-	```
-	{
-		"encrypt_pass": "/path/to/file/with/encryption/password",
-		"providers" : {
-			"google" : {
-				"files": [
-						"/path/to/dir/to/backup",
-						"/path/to/another/dir"
-				],
-				"client_id" : "",
-				"client_secret" : ""
-			},
-			"dropbox" : {
-				"files": [
-						"/path/to/file/to/backup/database.sql.gz"
-				],
-				"app_key" : "",
-				"app_secret" : ""
-			}
+```
+{
+	"encrypt_pass": "/path/to/file/with/encryption/password",
+	"providers" : {
+		"google" : {
+			"files": [
+					"/path/to/dir/to/backup",
+					"/path/to/another/dir"
+			],
+			"client_id" : "",
+			"client_secret" : ""
+		},
+		"dropbox" : {
+			"files": [
+					"/path/to/file/to/backup/database.sql.gz"
+			],
+			"app_key" : "",
+			"app_secret" : ""
 		}
 	}
-	```
+}
+```
 
 Explanation of the options:
 
