@@ -8,12 +8,18 @@ import os
 
 
 class DropboxProvider(provider.Provider):
+    """The Dropbox provider, which extends the base provider class. See the
+    file for that class for more comments about how the methods should be
+    implemented.
 
-    def __init__(self, file_path, config):
+    :param config: the configuration specific for this provider
+    """
+
+    def __init__(self, config):
         self.app_key = config['app_key']
         self.app_secret = config['app_secret']
 
-        super(DropboxProvider, self).__init__(file_path)
+        super(DropboxProvider, self).__init__()
 
         self.client = dropbox.client.DropboxClient(self.access_token)
         logging.info('Authorized for Dropbox')

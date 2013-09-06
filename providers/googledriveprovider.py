@@ -12,14 +12,20 @@ from oauth2client.client import OAuth2WebServerFlow, Credentials
 
 
 class GoogleDriveProvider(provider.Provider):
+    """The Google Drive provider, which extends the base provider class. See
+    the file for that class for more comments about how the methods should be
+    implemented.
+
+    :param config: the configuration specific for this provider
+    """
     oauth_scope = 'https://www.googleapis.com/auth/drive'
     redirect_uri = 'urn:ietf:wg:oauth:2.0:oob'
 
-    def __init__(self, file_path, config):
+    def __init__(self, config):
         self.client_id = config['client_id']
         self.client_secret = config['client_secret']
 
-        super(GoogleDriveProvider, self).__init__(file_path)
+        super(GoogleDriveProvider, self).__init__()
 
         # Create an httplib2.Http object and authorize it with our credentials
         http = httplib2.Http()
