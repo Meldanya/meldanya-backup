@@ -1,0 +1,20 @@
+{
+	"encrypt_pass": "/path/to/file/with/encryption/password",
+	"providers" : {
+		"google" : {
+			"files": [
+					"/path/to/dir/to/backup",
+					"/path/to/another/dir"
+			],
+			"client_id" : "",
+			"client_secret" : ""
+		},
+		"dropbox" : {
+			"files": [
+					"/path/to/file/to/backup/database.sql.gz"
+			],
+			"app_key" : "",
+			"app_secret" : ""
+		}
+	}
+}

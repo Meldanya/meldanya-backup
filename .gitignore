@@ -1,0 +1,5 @@
+meldanya_backup.conf
+*.pyc
+.*.swp
+.token.*
+enc.pass
