@@ -64,6 +64,8 @@ class Backup(object):
         for provider in self.providers:
             provider.cleanup(keep_files)
 
+# Get the absolute path were executing in
+abs_path = os.path.dirname(os.path.realpath(__file__)) + '/'
 
 def get_parser():
     parser = argparse.ArgumentParser(description='backup script')
@@ -79,8 +81,12 @@ def get_parser():
 
     return parser
 
-# Get the absolute path were executing in
-abs_path = os.path.dirname(os.path.realpath(__file__)) + '/'
+def absify(path):
+    path = os.path.expanduser(path)
+    if not os.path.isabs(path):
+        path = abs_path + path
+
+    return path
 
 
 def main():
@@ -92,10 +98,11 @@ def main():
         logging.disable('ERROR')
         args['loglevel'] = 'WARNING'
     loglevel = args['loglevel'].upper()
-    logging.basicConfig(filename=os.path.expanduser(args['logfile']),
-                        level=loglevel)
+    args['logfile'] = absify(args['logfile'])
+    logging.basicConfig(filename=args['logfile'], level=loglevel)
 
-    config = Config(args['config'], {})
+    args['config'] = absify(args['config'])
+    config = Config(args['config'])
 
     backup = Backup(abs_path, config)
     dropbox = DropboxProvider(abs_path, config['providers']['dropbox'])
