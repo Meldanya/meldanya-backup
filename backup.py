@@ -47,9 +47,9 @@ class Backup(object):
         return name
 
     def encrypt(self, filename):
-        enc_pass = self.conf['encrypt_pass']
-        if not enc_pass:
+        if 'encrypt_pass' not in self.conf:
             return filename
+        enc_pass = self.conf['encrypt_pass']
 
         cmd = ['openssl', 'aes-256-cbc', '-pass', 'file:' + enc_pass,
                '-in', filename, '-out', filename + '.enc']
