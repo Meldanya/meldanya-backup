@@ -12,12 +12,12 @@ class Backup(object):
 
     def __init__(self, abs_path, conf):
         self.abs_path = abs_path
-        self.delegates = set()
+        self.providers = set()
         self.conf = conf
 
-    def backup(self, files, delegate):
-        self.delegates.add(delegate)
-        root_dir = delegate.mkdir()
+    def backup(self, files, provider):
+        self.providers.add(provider)
+        root_dir = provider.mkdir()
 
         for file in files:
             filename = file
@@ -25,7 +25,7 @@ class Backup(object):
                 filename = self.tar(file)
             orig_filename = filename
             filename = self.encrypt(filename)
-            delegate.upload(filename, root_dir)
+            provider.upload(filename, root_dir)
             try:
                 os.remove(filename)
                 os.remove(orig_filename)
@@ -60,8 +60,8 @@ class Backup(object):
             return filename + '.enc'
 
     def cleanup(self, keep_files=5):
-        for delegate in self.delegates:
-            delegate.cleanup(keep_files)
+        for provider in self.providers:
+            provider.cleanup(keep_files)
 
 
 def get_parser():
